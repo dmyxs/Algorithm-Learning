@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            //冒泡排序，依次对比：
+            //可以想象成上体育课时排队：一排人的左边第一个，和他右边的人比身高，如果他比右边的人高，就和右边的人交换位置，交换位置后再和右边的人继续比。
+
+            let arr = [13, 1, 2, 5, 3, 6, 17, 8, 4]
+
+            function bubbleSort1(arr) {
+                //x变量是为了计算时间复杂度，与算法本身无关
+                let x = 0
+                for (let i = 0; i < arr.length; i++) {
+                    for (let j = 0; j < arr.length; j++) {
+                        //第一个和他右边的人比，如果大于就交换位置，否则就和下一个人比
+                        if (arr[j] > arr[j + 1]) {
+                            let self = arr[j] //自己站到另一个位置
+                            arr[j] = arr[j + 1] //右边的人站在自己的位置
+                            arr[j + 1] = self //自己站到右边的人原来的位置
+                        }
+                        x++
+                    }
+                }
+                console.log(x) //每比较一次，x就加1，一共比较了81次，9个数字，也就是9的平方，也叫O2^
+            }
+            bubbleSort1(arr)
+            console.log(arr) //函数遍历完的结果：[1, 2, 3, 4, 5, 6, 8, 13, 17]
+
+            //优化版：如果左边第一个人不比右边的高，就不需要再继续和后面的比了，而是重新从他右边的人开始，再继续比较。
+            function bubbleSort2(arr) {
+                let x = 0
+                for (let i = 0; i < arr.length; i++) {
+                    loop: for (let j = 0; j < arr.length; j++) {
+                        if (arr[j] > arr[j + 1]) {
+                            let self = arr[j]
+                            arr[j] = arr[j + 1]
+                            arr[j + 1] = self
+                        } else {
+                            continue loop
+                        }
+                        x++
+                    }
+                }
+                console.log(x) //比较次数是13，比上面的计算效率提高了几倍。
+            }
+            bubbleSort2(arr)
+            console.log(arr) //[1, 2, 3, 4, 5, 6, 8, 13, 17]
+        </script>
+    </body>
+</html>
