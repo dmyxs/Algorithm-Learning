@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //快速排序
+        //复杂度：O(n * lgn) lg = 2，缺点：空间占用多
+        //思路：找一个人，然后所有人和他比一次，比他高的站右边，否则站左边，然后继续对分组进行对比（递归），全部排好了再排在一起即可
+        let arr = [10, 1, 8, 5, 17, 12]
+
+        function quickSort(arr) {
+            //如果数组小于1，则返回
+            if (arr.length < 1) {
+                return arr
+            }
+
+            //找一个人
+            let flag = arr[0]
+
+            //比这个人高的一组
+            let right = []
+
+            //比这个人矮的一组
+            let left = []
+
+            // 不是和自己比，所以要从1开始
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i] > flag) {
+                    right.push(arr[i])
+                } else {
+                    left.push(arr[i])
+                }
+            }
+
+            //递归再次排序，然后拼接在一起
+            return quickSort(left)
+                .concat([flag]) //以数组的方式合并起来
+                .concat(quickSort(right))
+        }
+        console.log(quickSort(arr)) //[1, 5, 8, 10, 12, 17]
+
+        //递归，再次对左右两边进行排序
+        //第一次执行[1,8,5] 10 [17,12]
+        //第一次递归执行[1,[8,5]] 10 [17,12]
+        //第二次递归执行[1,[[5],[8]]] 10 [17,12]
+        //第三次递归执行[1,[[5],[8]]] 10 [[12],17]
+    </script>
+
+</body>
+
+</html>
