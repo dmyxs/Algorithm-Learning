@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //计算排序：先计算，后排序
+        //计算思路：扑克排列：从一副牌中，依次拿出牌，放在一个盒子里摆放，如果是同样的牌，就叠加在一起，不同就另外放一个位置
+        //排序思路：从最小的牌逐个叠加排列到手中即可
+
+        //扑克牌
+        let arr = [10, 2, 1, 5, 8, 2, 5, 9, 15, 1, 2, 2, 5]
+
+            let index = 0
+
+            //摆放扑克牌的盒子
+            let box = []
+
+            //依次拿出牌
+            while (index < arr.length) {
+                //看看是什么牌？
+                let number = arr[index]
+
+                //如果盒子中没有相同的牌
+                if (box[number] === undefined) {
+                    box[number] = 1
+
+                //如果盒子有相同的牌，就叠加
+                } else {
+                    box[number] += 1
+                }
+                index++
+            }
+            console.log(box)  //[empty, 2, 4, empty × 2, 3, empty × 2, 1, 1, 1, empty × 4, 1]
+
+
+
+            //排序
+            //手中
+            let newArr = []
+
+            for (let i = 0; i < box.length; i++) {
+                //同样的一把牌，如：4个3
+                let count = box[i]
+
+                if (count) {
+                    //逐个添加到手中：i就是牌
+                    for (let j = 0; j < count; j++) {
+                        newArr.push(i)
+                    }
+                }
+            }
+            console.log(newArr) // [1, 1, 2, 2, 2, 2, 5, 5, 5, 8, 9, 10, 15]
+
+            //执行逻辑：
+            //for循环：
+            //i = 0， box[i] = empty,  empty不存在，执行下一个，i++
+            //i = 1， box[i] = 2，2存在，进入条件，newArr push 两个 1...
+    </script>
+
+</body>
+
+</html>

@@ -9,17 +9,15 @@
 
 <body>
     <script>
-        //快速排序
-        //复杂度：O(n * lgn) lg = 2，缺点：空间占用多
-        //思路：找一个人，然后所有人和他比一次，比他高的站右边，否则站左边，然后继续对分组进行对比（递归），全部排好了再排在一起即可
+        //快速排序：体育课排队
+        //思路：在一排人中找一个人，然后所有人和他比一次，比他高的站右边，否则站左边，分为两组
+        //然后用同样的思路，继续对左右两边的分组再次进行对比（递归），全部排好后，再排在一起即可
         let arr = [10, 1, 8, 5, 17, 12]
-
         function quickSort(arr) {
             //如果数组小于1，则返回
             if (arr.length < 1) {
                 return arr
             }
-
             //找一个人
             let flag = arr[0]
 
@@ -39,9 +37,10 @@
             }
 
             //递归再次排序，然后拼接在一起
-            return quickSort(left)
-                .concat([flag]) //以数组的方式合并起来
-                .concat(quickSort(right))
+            return [...quickSort(left), flag, ...quickSort(right)]
+            // return quickSort(left)
+            //     .concat([flag])
+            //     .concat(quickSort(right))
         }
         console.log(quickSort(arr)) //[1, 5, 8, 10, 12, 17]
 
